@@ -1,4 +1,4 @@
-rootProject.name = "morphe-patches-template"
+rootProject.name = "morphe-patches"
 
 pluginManagement {
     repositories {
@@ -17,5 +17,12 @@ pluginManagement {
 }
 
 plugins {
-    id("app.morphe.patches") version "1.3.0"
+    id("app.morphe.patches") version "1.3.2"
+}
+
+settings {
+    extensions {
+        defaultNamespace = "app.danielphan2003.extension"
+        proguardFiles(rootProject.projectDir.resolve("extensions/proguard-rules.pro").toString())
+    }
 }

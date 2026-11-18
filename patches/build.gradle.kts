@@ -1,25 +1,19 @@
-group = "app.template"
+group = "app.danielphan2003"
 
 patches {
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
-        contact = "na"
-        website = "na"
-        license = "GPLv3"
-    }
-}
-
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        name = "danielphan2003 Patches"
+        description = "Patches for Wattpad and Kiki Auto"
+        source = "git@github.com:danielphan2003/morphe-patches.git"
+        author = "danielphan2003"
+        contact = "https://github.com/danielphan2003/morphe-patches/issues"
+        website = "https://github.com/danielphan2003/morphe-patches"
+        license = "GNU General Public License v3.0"
     }
 }
 
 dependencies {
-    // Used by JsonGenerator.
+    // Used by PatchListGenerator.
     implementation(libs.gson)
 }
 
@@ -40,6 +34,6 @@ tasks {
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs = listOf("-Xcontext-receivers")
+        freeCompilerArgs.add("-Xcontext-parameters")
     }
 }

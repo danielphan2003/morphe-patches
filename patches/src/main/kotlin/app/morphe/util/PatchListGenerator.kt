@@ -31,6 +31,7 @@
  * applicable to this file.
  */
 
+
 package app.morphe.util
 
 import app.morphe.patcher.patch.Patch
@@ -45,16 +46,19 @@ typealias PackageName = String
 typealias VersionName = String
 
 internal fun main() {
-    val patchFiles = setOf(
-        File("build/libs/").listFiles { file ->
-            val fileName = file.name
-            !fileName.contains("javadoc") &&
-                    !fileName.contains("sources") &&
-                    fileName.endsWith(".mpp")
-        }!!.first()
-    )
-    val loadedPatches = loadPatchesFromJar(patchFiles)
-    val patchClassLoader = URLClassLoader(patchFiles.map { it.toURI().toURL() }.toTypedArray())
+    val patchFile = File("build/libs/patches.mpp")
+        .takeIf { it.isFile }
+        ?: File("build/libs/")
+            .listFiles { file ->
+                file.name.endsWith(".mpp") &&
+                    !file.name.contains("javadoc") &&
+                    !file.name.contains("sources")
+            }
+            ?.maxByOrNull { it.lastModified() }
+        ?: error("No patch bundle found in build/libs")
+
+    val loadedPatches = loadPatchesFromJar(setOf(patchFile))
+    val patchClassLoader = URLClassLoader(arrayOf(patchFile.toURI().toURL()))
     val manifest = patchClassLoader.getResources("META-INF/MANIFEST.MF")
 
     while (manifest.hasMoreElements()) {
@@ -73,7 +77,7 @@ private fun generatePatchList(version: String, patches: Set<Patch<*>>) {
 
     val patchesMap = patches.sortedBy { it.name }.map {
         JsonPatch(
-            it.name!!,
+            it.name,
             it.description,
             it.use,
             it.dependencies.map { dependency -> dependency.javaClass.simpleName },
@@ -92,7 +96,7 @@ private fun generatePatchList(version: String, patches: Set<Patch<*>>) {
         )
     }
 
-    val gsonBuilder = GsonBuilder()
+    val gson = GsonBuilder()
         .serializeNulls()
         .disableHtmlEscaping()
         .setPrettyPrinting()
@@ -100,11 +104,9 @@ private fun generatePatchList(version: String, patches: Set<Patch<*>>) {
 
     val jsonObject = JsonObject()
     jsonObject.addProperty("version", "v$version")
-    jsonObject.add("patches", gsonBuilder.toJsonTree(patchesMap))
+    jsonObject.add("patches", gson.toJsonTree(patchesMap))
 
-    listJson.writeText(
-        gsonBuilder.toJson(jsonObject)
-    )
+    listJson.writeText(gson.toJson(jsonObject))
 }
 
 @Suppress("unused")
@@ -126,4 +128,3 @@ private class JsonPatch(
         val values: Map<String, Any?>?,
     )
 }
-
