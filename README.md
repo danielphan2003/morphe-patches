@@ -1,82 +1,57 @@
-# 👋🧩 Morphe Patches template
+# danielphan2003 Patches
 
-Template repository for Morphe Patches.
+Patches for [Morphe](https://morphe.software) that fix annoyances in Wattpad and Kiki Auto.
 
-&nbsp;
-## ❓ About
+## Add these patches to Morphe
 
-This is a template to create a new Morphe Patches repository.
+Open https://morphe.software/add-source?github=danielphan2003/morphe-patches on the device with
+Morphe Manager, or add `https://github.com/danielphan2003/morphe-patches` as a patch source by hand.
 
-Morphe Patches template is based off the prior work of [ReVanced](https://github.com/ReVanced/revanced-patches-template).
-All modifications made by Morphe, along with their dates, can be found in the Git history.
+## Patches
 
+### Wattpad 11.40.5 (`wp.wattpad`)
 
-## 🚀 Get started
+| Patch | What it does |
+| --- | --- |
+| Hide premium promos | Hides premium upsell buttons and banners, and stops the subscription paywall from opening. |
+| Hide reader ads | Hides banner and interstitial ads in the reader and on story details, and the ad skips promo row. |
+| Keep reader size steady | Keeps the system bars hidden when the reading menu opens, so paging mode does not lay out the whole part again. |
+| Preload reader pages | Lays out the next 3 pages in paging mode ahead of time, so turning a page does not show a loading page. |
+| Unlimited offline stories | Removes the limit on how many stories can be saved for offline reading. |
+| Unlock theme colours | Unlocks every theme colour in Customize theme without a subscription. |
 
-To start using this template, follow these steps:
+### Kiki Auto 26.04.01.02 (`ai.zalo.kiki.car`)
 
-1. [Create a new repository using this template](https://github.com/new?template_name=morphe-patches-template&template_owner=MorpheApp)
-2. Set up the [build.gradle.kts](patches/build.gradle.kts) file (Specifically, the 
-   [group of the project](patches/build.gradle.kts#L1), and the [About](patches/build.gradle.kts#L5-L11))
-3. Set up the [README.md](README.md) file[^1] (e.g, title, description, license, summary of the patches
-that are included in the repository), the [issue templates](.github/ISSUE_TEMPLATE)[^2]  and the [contribution guidelines](CONTRIBUTING.md)[^3]
-4. Choose a name for your patches project. Keep in mind you must use a unique name that does not 
-   imply or suggest authorship by the Morphe open source project. If unsure, then simply name these
-   patches after yourself ("UserXYZ Morphe patches"). See the [NOTICE](NOTICE) for details. 
-5. (Optional): Add `patches-bundle.png` to the project if you want a custom icon to show in
-   Morphe Manager instead of your GitHub profile avatar.
+| Patch | What it does |
+| --- | --- |
+| Skip Zalo login | Uses Kiki's guest authentication instead of requiring a Zalo login. |
+| Open YouTube in default app | Opens YouTube links in Android's default app instead of forcing the stock YouTube app. |
+| Debug Kiki voice failures | Off by default. Logs voice recognition, auth and network failures to logcat. |
 
-🎉 You are now ready to start creating patches!
+Each patch targets the app version listed above. Other versions are likely to fail to patch.
 
-## 🧑‍💻 Usage
+## Build
 
-To develop and release Morphe Patches using this template, some things need to be considered:
+The Morphe Gradle plugin and patcher come from GitHub Packages, so Gradle needs a GitHub token
+with the `read:packages` scope:
 
-- Development starts in feature branches. Once a feature branch is ready, it is squashed and merged into the `dev` branch
-- The `dev` branch is merged into the `main` branch once it is ready for release
-- Semantic versioning is used to version Morphe Patches.
-- [Semantic commit](https://kapeli.com/cheat_sheets/Semantic_Commits.docset/Contents/Resources/Documents/index) messages are used for commits
-- Commits on the `dev` branch and `main` branch are automatically released
-via the [release.yml](.github/workflows/release.yml) workflow, which is also responsible for generating the changelog
-and updating the version of Morphe Patches. It is triggered by pushing to the `dev` or `main` branch.
-The workflow uses the `publish` task to publish the release of Morphe Patches.
-- The `buildAndroid` task is used to build Morphe Patches so that it can be used on Android.
+```sh
+export GITHUB_ACTOR=<your GitHub username>
+export GITHUB_TOKEN=<token with read:packages>
+./gradlew :patches:buildAndroid generatePatchesList
+```
 
+Building the Kiki extension in `extensions/` also needs the Android SDK (`ANDROID_HOME`).
+The patch bundle is written to `patches/build/libs/patches-<version>.mpp`.
 
-## 🤓 Tips
-- See the [patcher documentation](https://github.com/MorpheApp/morphe-patcher/blob/main/docs/1_patcher_intro.md)
-  for more examples of creating patches and fingerprints.
-- Do not manually edit any generated files such as: `patches-list.json`, `patches-bundle.json`, `CHANGELOG.md`.
-  These files will be automatically updated in the release action.
-- Do not force push any semantic release commits or you will break the release. To 'redo' the last release then:
-  - Git drop the last dev/main semantic release commit you want to redo.
-  - Delete the release from the release area of this repo and delete the tag   
-  - Make any other changes you wish to do
-  - Force push dev/main branch
-  - A new replacement release will be created by `release.yml`
+## Releases
 
+Commits on `dev` and `main` are released by [release.yml](.github/workflows/release.yml) with
+semantic-release, so commit messages follow [Conventional Commits](https://www.conventionalcommits.org).
+Do not edit the generated `patches-list.json`, `patches-bundle.json` or `CHANGELOG.md` by hand.
 
-## 📚 Everything else
+## License
 
-Optionally you can include a button/link in this readme that users can click to add your 
-patches to Morphe (update the links below after creating your new patches repo):
-
-#### How to use these patches
-
-Click here to add these patches to Morphe: https://morphe.software/add-source?github=xyz-user/xyz-patches
-
-Or manually add this repository url as a patch source in Morphe: https://github.com/xyz-user/xyz-patches
-
-### 📙 Contributing
-
-Thank you for considering contributing to UserXYZ Morphe Patches template.  
-You can find the contribution guidelines [here](CONTRIBUTING.md).
-
-### 🛠️ Building
-
-To build UserXYZ Morphe Patches template,
-you can follow the [Morphe documentation](https://github.com/MorpheApp/morphe-documentation).
-
-## 📜 License
-
-UserXYZ Morphe Patches are licensed under the [GNU General Public License v3.0](LICENSE)
+Licensed under the [GNU General Public License v3.0](LICENSE), with the additional terms in [NOTICE](NOTICE).
+This project is based on the [Morphe Patches template](https://github.com/MorpheApp/morphe-patches-template)
+and is not affiliated with the Morphe project.

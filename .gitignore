@@ -128,3 +128,9 @@ node_modules/
 # Ignore IDEA files
 .idea/
 local.properties
+
+# Patcher work files and the local signing keystore
+morphe-temporary-files/
+
+# Kotlin compiler daemon state
+.kotlin/

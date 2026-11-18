@@ -1,30 +1,19 @@
-# 👋 Contribution guidelines
+# Contributing
 
-This document describes how to contribute to Morphe Patches template.
+Bug reports and patch requests are welcome as [issues](https://github.com/danielphan2003/morphe-patches/issues).
 
-## 📖 Resources to help you get started
+## Bug reports
 
-* [Issues](https://github.com/Morpheapp/morphe-patches-template/issues) are where we keep track of bugs and feature requests
+Open a [bug report](https://github.com/danielphan2003/morphe-patches/issues/new?labels=Bug+report&template=bug_report.yml&title=bug%3A+)
+with the app version, the patches you applied and, if the app crashes, the `AndroidRuntime` lines from logcat.
 
-## 🙏 Submitting a feature request
+## Feature requests
 
-Features can be requested by opening an issue using the
-[Feature request issue template](https://github.com/MorpheApp/morphe-patches-template/issues/new?labels=Feature+request&template=feature_request.yml&title=feat%3A+).
+Open a [feature request](https://github.com/danielphan2003/morphe-patches/issues/new?labels=Feature+request&template=feature_request.yml&title=feat%3A+)
+describing the app, its version and what the patch should change.
 
-## 🐞 Submitting a bug report
+## Pull requests
 
-If you encounter a bug while using Morphe Patches template, open an issue using the
-[Bug report issue template](https://github.com/MorpheApp/morphe-patches-template/issues/new?labels=Bug+report&template=bug_report.yml&title=bug%3A+).
-
-## 📝 How to contribute
-
-1. Before contributing, it is recommended to open an issue to discuss your change
-with the maintainers of Morphe Patches template
-2. Development happens on the `dev` branch. Fork the repository and create your branch from `dev`
-3. Commit your changes
-4. Submit a pull request to the `dev` branch of the repository and reference issues
-that your pull request closes in the description of your pull request
-5. Our team will review your pull request and provide feedback. Once your pull request is approved,
-it will be merged into the `dev` branch and will be included in the next release of Morphe Patches template
-
-❤️ Thank you for considering contributing to Morphe Patches template
+1. Open an issue first to discuss larger changes.
+2. Branch from `dev`, and use [Conventional Commits](https://www.conventionalcommits.org) for commit messages.
+3. Open the pull request against `dev`, and mention the issues it closes.
