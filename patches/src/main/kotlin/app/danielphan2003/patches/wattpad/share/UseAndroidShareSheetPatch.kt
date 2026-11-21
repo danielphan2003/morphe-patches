@@ -18,7 +18,7 @@ private const val SHARE_CAMPAIGN = "Lwp/wattpad/share/enums/ShareCampaign;"
 @Suppress("unused")
 val useAndroidShareSheetPatch = bytecodePatch(
     name = "Use Android share sheet",
-    description = "Shares stories, parts, quotes and profiles through Android's share sheet instead of Wattpad's own share grid, without the tracking parameters and username Wattpad adds to shared links.",
+    description = "Opens Android's share sheet in place of Wattpad's own share grid, and leaves out the tracking parameters and username Wattpad adds to shared links.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WATTPAD)

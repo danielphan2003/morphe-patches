@@ -20,7 +20,7 @@ Morphe Manager, or add `https://github.com/danielphan2003/morphe-patches` as a p
 | Preload reader pages | Lays out the next 3 pages in paging mode ahead of time, so turning a page does not show a loading page. |
 | Unlimited offline stories | Removes the limit on how many stories can be saved for offline reading. |
 | Unlock theme colours | Unlocks every theme colour in Customize theme without a subscription. |
-| Use Android share sheet | Shares through Android's share sheet instead of Wattpad's own, without the tracking parameters and username Wattpad adds to shared links. |
+| Use Android share sheet | Opens Android's share sheet in place of Wattpad's own share grid, without the tracking parameters and username Wattpad adds to shared links. |
 
 ### Kiki Auto 26.04.01.02 (`ai.zalo.kiki.car`)
 

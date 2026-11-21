@@ -16,7 +16,7 @@ public final class ReaderInsets {
      * insets that do not change while reading: the status bar only when it is meant to be shown, and
      * never the navigation bar, which is then drawn over the reader's own bottom margin.
      */
-    public static void keepReaderHeightSteady(Window window, boolean showStatusBar) {
+    public static void keepReaderHeightSteady(Window window, Object readingPreferences) {
         View decor = window.getDecorView();
         int id = decor.getResources().getIdentifier("wattpad_activity_root_container", "id", decor.getContext().getPackageName());
         View root = id == 0 ? null : decor.findViewById(id);
@@ -27,6 +27,8 @@ public final class ReaderInsets {
         View bottomBar = barId == 0 ? null : root.findViewById(barId);
         root.setOnApplyWindowInsetsListener((view, insets) -> {
             liftBottomBar(bottomBar, barId, insets);
+            // Read the setting on every dispatch: it can change while the reader is in the background.
+            boolean showStatusBar = shouldShowStatusBar(readingPreferences);
             int top = 0;
             int left;
             int right;
@@ -50,6 +52,14 @@ public final class ReaderInsets {
             return insets.consumeSystemWindowInsets();
         });
         root.requestApplyInsets();
+    }
+
+    private static boolean shouldShowStatusBar(Object readingPreferences) {
+        try {
+            return (Boolean) readingPreferences.getClass().getMethod("getShouldShowStatusBar").invoke(readingPreferences);
+        } catch (Throwable ignored) {
+            return true;
+        }
     }
 
     /**

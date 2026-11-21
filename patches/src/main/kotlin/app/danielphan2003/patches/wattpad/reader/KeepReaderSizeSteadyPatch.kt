@@ -31,9 +31,7 @@ val keepReaderSizeSteadyPatch = bytecodePatch(
             """
                 iget-object v0, p0, Lwp/wattpad/reader/utils/ReaderWindowConfiguration;->window:Landroid/view/Window;
                 iget-object v1, p0, Lwp/wattpad/reader/utils/ReaderWindowConfiguration;->readingPreferences:Lwp/wattpad/reader/utils/ReadingPreferences;
-                invoke-virtual { v1 }, Lwp/wattpad/reader/utils/ReadingPreferences;->getShouldShowStatusBar()Z
-                move-result v1
-                invoke-static { v0, v1 }, $READER_INSETS->keepReaderHeightSteady(Landroid/view/Window;Z)V
+                invoke-static { v0, v1 }, $READER_INSETS->keepReaderHeightSteady(Landroid/view/Window;Ljava/lang/Object;)V
             """,
         )
     }
