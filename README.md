@@ -13,12 +13,14 @@ Morphe Manager, or add `https://github.com/danielphan2003/morphe-patches` as a p
 
 | Patch | What it does |
 | --- | --- |
-| Hide premium promos | Hides premium upsell buttons and banners, and stops the subscription paywall from opening. |
-| Hide reader ads | Hides banner and interstitial ads in the reader and on story details, and the ad skips promo row. |
-| Keep reader size steady | Keeps the system bars hidden when the reading menu opens, so paging mode does not lay out the whole part again. |
+| Disable telemetry and ad SDKs | Stops the ad networks and the analytics, attribution, crash reporting and session replay SDKs from starting, and only lets through the connections reading, comments and signing in need. Also lets Wattpad run with GrapheneOS's dynamic code loading via memory blocked. |
+| Hide premium promos | Hides premium upsell buttons and banners, including the "No ads" button at the end of a part, and stops the subscription paywall from opening. |
+| Hide reader ads | Hides ads in the reader, on story details and between comments, the empty ad slot over the bottom of the page, and the ad skips promo row. |
+| Keep reader size steady | Keeps the reader the same size when the system bars appear or hide, so paging mode does not lay out the part again when the reading menu opens or the app is resumed. |
 | Preload reader pages | Lays out the next 3 pages in paging mode ahead of time, so turning a page does not show a loading page. |
 | Unlimited offline stories | Removes the limit on how many stories can be saved for offline reading. |
 | Unlock theme colours | Unlocks every theme colour in Customize theme without a subscription. |
+| Use Android share sheet | Opens Android's share sheet in place of Wattpad's own share grid, without the tracking parameters and username Wattpad adds to shared links. |
 
 ### Kiki Auto 26.04.01.02 (`ai.zalo.kiki.car`)
 

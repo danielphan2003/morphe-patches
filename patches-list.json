@@ -14,8 +14,22 @@
       "options": []
     },
     {
+      "name": "Disable telemetry and ad SDKs",
+      "description": "Stops the ad networks and analytics, attribution, crash reporting and session tracking SDKs from starting, and blocks every connection that reading, comments and signing in do not need. Also lets Wattpad run with GrapheneOS's dynamic code loading via memory blocked.",
+      "use": true,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": {
+        "wp.wattpad": [
+          "11.40.5"
+        ]
+      },
+      "options": []
+    },
+    {
       "name": "Hide premium promos",
-      "description": "Hides premium upsell buttons and banners, and prevents the subscription paywall from being shown.",
+      "description": "Hides premium upsell buttons and banners, including the \"No ads\" button at the end of a part, and prevents the subscription paywall from being shown.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
@@ -27,7 +41,7 @@
     },
     {
       "name": "Hide reader ads",
-      "description": "Hides banner and interstitial ads displayed while reading stories and on story details, and hides the ad skips promo row.",
+      "description": "Hides banner and interstitial ads displayed while reading stories and on story details, the empty sticky banner slot over the bottom of the page, the ad rows between comments, and the ad skips promo row.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
@@ -39,7 +53,7 @@
     },
     {
       "name": "Keep reader size steady",
-      "description": "Keeps the system bars as they are while reading when the reading menu opens, so paging mode does not lay out the whole part again every time the menu opens or closes.",
+      "description": "Keeps the reader the same size when the system bars appear or hide, so paging mode does not lay out the whole part again when the reading menu opens or the app is resumed.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {
@@ -100,6 +114,18 @@
     {
       "name": "Unlock theme colours",
       "description": "Unlocks all theme colours in the Customize theme screen without a premium subscription.",
+      "use": true,
+      "dependencies": [],
+      "compatiblePackages": {
+        "wp.wattpad": [
+          "11.40.5"
+        ]
+      },
+      "options": []
+    },
+    {
+      "name": "Use Android share sheet",
+      "description": "Opens Android's share sheet in place of Wattpad's own share grid, and leaves out the tracking parameters and username Wattpad adds to shared links.",
       "use": true,
       "dependencies": [],
       "compatiblePackages": {

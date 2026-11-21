@@ -39,3 +39,17 @@ internal object StoryDetailsBannerConfigFingerprint : Fingerprint(
     returnType = "Landroidx/compose/runtime/snapshots/SnapshotStateMap;",
     parameters = emptyList(),
 )
+
+internal object PartEndFooterPremiumCtaFingerprint : Fingerprint(
+    definingClass = "Lwp/wattpad/reader/readingmodes/common/views/ReaderPartEndFooter;",
+    name = "onPremiumCtaClick",
+    returnType = "V",
+    parameters = listOf("Lkotlin/jvm/functions/Function0;"),
+)
+
+internal object PartEndFooterPremiumPlusCtaFingerprint : Fingerprint(
+    definingClass = "Lwp/wattpad/reader/readingmodes/common/views/ReaderPartEndFooter;",
+    name = "onPremiumPlusCtaClick",
+    returnType = "V",
+    parameters = listOf("Lkotlin/jvm/functions/Function0;"),
+)
