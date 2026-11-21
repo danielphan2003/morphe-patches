@@ -6,7 +6,7 @@ import app.morphe.patcher.patch.bytecodePatch
 
 val hidePremiumPromosPatch = bytecodePatch(
     name = "Hide premium promos",
-    description = "Hides premium upsell buttons and banners, and prevents the subscription paywall from being shown.",
+    description = "Hides premium upsell buttons and banners, including the \"No ads\" button at the end of a part, and prevents the subscription paywall from being shown.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WATTPAD)
@@ -29,6 +29,10 @@ val hidePremiumPromosPatch = bytecodePatch(
                 const/4 p2, 0x0
             """,
         )
+
+        // End of part footer "No ads" and "Premium+" buttons, shown whenever a click handler is set.
+        PartEndFooterPremiumCtaFingerprint.method.addInstructions(0, "const/4 p1, 0x0")
+        PartEndFooterPremiumPlusCtaFingerprint.method.addInstructions(0, "const/4 p1, 0x0")
 
         // Automatic startup / new user subscription paywall prompt.
         ResolveStartupPromptFingerprint.method.addInstructions(

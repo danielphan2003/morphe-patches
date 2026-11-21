@@ -1,34 +1,39 @@
 package app.danielphan2003.patches.wattpad.reader
 
 import app.danielphan2003.patches.wattpad.shared.Constants.COMPATIBILITY_WATTPAD
+import app.danielphan2003.patches.wattpad.shared.Constants.EXTENSION
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
 
+private const val READER_INSETS = "Lapp/danielphan2003/patches/wattpad/ReaderInsets;"
+
 val keepReaderSizeSteadyPatch = bytecodePatch(
     name = "Keep reader size steady",
-    description = "Keeps the system bars as they are while reading when the reading menu opens, " +
-        "so paging mode does not lay out the whole part again every time the menu opens or closes.",
+    description = "Keeps the reader the same size when the system bars appear or hide, " +
+        "so paging mode does not lay out the whole part again when the reading menu opens or the app is resumed.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_WATTPAD)
+    extendWith(EXTENSION)
 
     execute {
         /*
-         * Opening the reading menu calls exitImmersiveMode(), which shows every system bar,
-         * and closing it (also on every page turn) calls enterImmersiveMode(), which hides
-         * the navigation bar again, and the status bar too unless "Display status bar" is on.
-         * The reader window fits inside the system bars, so its height changes each time,
-         * and paging mode answers any height change by discarding every laid out page and
-         * paginating the part again: a loading page, then the same page with a line more or
-         * less. Its only callers open the reading menu, so make exitImmersiveMode() reapply
-         * the immersive state instead. The bars can still be revealed by swiping from the
-         * screen edge; those transient bars draw over the reader without resizing it.
+         * The reader's root view fits the system windows, so it takes the visible system bars as
+         * padding. The bars change when the reading menu opens or closes, and when the app comes
+         * back from the background, and paging mode answers any height change by discarding every
+         * laid out page and paginating the part again: a loading page, then the same page.
+         * apply() runs once the reader's views exist, so give the root view insets that stay the
+         * same while reading there: the status bar when "Display status bar" is on, and never the
+         * navigation bar, which then draws over the reader's own bottom margin.
          */
-        ExitImmersiveModeFingerprint.method.addInstructions(
+        ReaderWindowConfigurationApplyFingerprint.method.addInstructions(
             0,
             """
-                invoke-virtual {p0}, Lwp/wattpad/reader/utils/ReaderWindowConfiguration;->enterImmersiveMode()V
-                return-void
+                iget-object v0, p0, Lwp/wattpad/reader/utils/ReaderWindowConfiguration;->window:Landroid/view/Window;
+                iget-object v1, p0, Lwp/wattpad/reader/utils/ReaderWindowConfiguration;->readingPreferences:Lwp/wattpad/reader/utils/ReadingPreferences;
+                invoke-virtual { v1 }, Lwp/wattpad/reader/utils/ReadingPreferences;->getShouldShowStatusBar()Z
+                move-result v1
+                invoke-static { v0, v1 }, $READER_INSETS->keepReaderHeightSteady(Landroid/view/Window;Z)V
             """,
         )
     }

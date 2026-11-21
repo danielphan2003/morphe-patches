@@ -9,9 +9,9 @@ internal object EnqueuePageLoadFingerprint : Fingerprint(
     parameters = emptyList(),
 )
 
-internal object ExitImmersiveModeFingerprint : Fingerprint(
+internal object ReaderWindowConfigurationApplyFingerprint : Fingerprint(
     definingClass = "Lwp/wattpad/reader/utils/ReaderWindowConfiguration;",
-    name = "exitImmersiveMode",
+    name = "apply",
     returnType = "V",
     parameters = emptyList(),
 )

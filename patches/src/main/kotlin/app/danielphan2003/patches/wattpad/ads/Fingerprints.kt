@@ -15,3 +15,16 @@ internal object ReadingPreferencesFragmentFingerprint : Fingerprint(
     parameters = listOf("Landroid/os/Bundle;", "Ljava/lang/String;"),
     returnType = "V",
 )
+
+internal object UpdateBannerAdBackgroundColorSchemeFingerprint : Fingerprint(
+    definingClass = "Lwp/wattpad/reader/ReaderActivity;",
+    name = "updateBannerAdBackgroundColorScheme",
+    returnType = "V",
+    parameters = emptyList(),
+)
+
+internal object CommentsInlineAdFingerprint : Fingerprint(
+    definingClass = "Lwp/wattpad/comments/core/composables/CommentsInlineAdKt;",
+    name = "CommentsInlineAd",
+    returnType = "V",
+)

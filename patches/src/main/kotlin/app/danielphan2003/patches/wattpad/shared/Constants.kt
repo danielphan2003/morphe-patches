@@ -5,6 +5,9 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 
 internal object Constants {
+    /** Java helpers used by the Wattpad patches, built from extensions/wattpad. */
+    const val EXTENSION = "extensions/wattpad.mpe"
+
     val COMPATIBILITY_WATTPAD = Compatibility(
         name = "Wattpad",
         packageName = "wp.wattpad",
