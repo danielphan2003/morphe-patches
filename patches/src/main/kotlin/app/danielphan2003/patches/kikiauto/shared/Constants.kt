@@ -11,6 +11,7 @@ internal object Constants {
         targets = listOf(
             AppTarget(
                 version = "26.04.01.02",
+                versionCode = 26040102,
             ),
         ),
     )

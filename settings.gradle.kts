@@ -17,7 +17,7 @@ pluginManagement {
 }
 
 plugins {
-    id("app.morphe.patches") version "1.3.2"
+    id("app.morphe.patches") version "1.3.4"
 }
 
 settings {
@@ -26,3 +26,7 @@ settings {
         proguardFiles(rootProject.projectDir.resolve("extensions/proguard-rules.pro").toString())
     }
 }
+
+// Android API stubs the TikTok patches compile against, kept at upstream's path
+// (icysymmetra/tiktok-patches-for-morphe, see CONTRIBUTING.md).
+include(":patches:stub")

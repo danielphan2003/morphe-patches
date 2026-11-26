@@ -18,7 +18,7 @@ internal object Constants {
             "012de45837d20561255a02bbc22334c1f681d01b366fe31bef418baf535903ef",
         ),
         targets = listOf(
-            AppTarget(version = "11.40.5"),
+            AppTarget(version = "11.40.5", versionCode = 3823),
         ),
     )
 }

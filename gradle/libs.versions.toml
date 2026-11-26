@@ -1,8 +1,22 @@
 [versions]
-morphe-patcher = "1.3.3"
+# Patcher 2.0: the TikTok SEA patches need its API. Wattpad and Kiki Auto build on it unchanged.
+morphe-patcher = "2.0.0"
+# Read by the app.morphe.patches settings plugin. It has to be the smali commit the patcher above
+# was built against, or two copies of dexlib2 meet on the R8 classpath.
 #noinspection GradleDependency
-smali = "d92701d947"
-gson = "2.13.2"
+smali = "4220ae75f7"
+gson = "2.14.0"
+# Compile-time only (smali needs it); the patcher provides it at run time, so the bundle leaves it out.
+guava = "33.7.2-jre"
+# androidx.annotation, compile-only in the TikTok extensions.
+annotation = "1.10.0"
 
 [libraries]
+morphe-patcher = { module = "app.morphe:morphe-patcher", version.ref = "morphe-patcher" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+
+[plugins]
+# The Android Gradle plugin comes from the app.morphe.patches settings plugin; nothing pins it here.
+android-library = { id = "com.android.library" }
